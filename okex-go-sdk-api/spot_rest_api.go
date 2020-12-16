@@ -303,6 +303,32 @@ func (client *Client) GetSpotInstrumentCandles(instrument_id string, options *ma
 }
 
 /*
+获取成交数据
+获取币对最新的60条成交列表。这个请求支持分页，并且按时间倒序排序和存储，最新的排在最前面。请参阅分页部分以获取第一页之后的其他纪录。
+
+限速规则：20次/2s
+HTTP请求
+GET /api/spot/v3/instruments/<instrument_id>/history/candles
+*/
+func (client *Client) GetSpotInstrumentHistoryCandles(instrument_id string, options *map[string]string) (*[]interface{}, error) {
+	r := []interface{}{}
+
+	uri := GetInstrumentIdUri(SPOT_INSTRUMENT_CANDLES_HISTORY, instrument_id)
+	fullOptions := NewParams()
+	if options != nil && len(*options) > 0 {
+		fullOptions["start"] = (*options)["start"]
+		fullOptions["end"] = (*options)["end"]
+		fullOptions["granularity"] = (*options)["granularity"]
+		uri = BuildParams(uri, fullOptions)
+	}
+
+	if _, err := client.Request(GET, uri, nil, &r); err != nil {
+		return nil, err
+	}
+	return &r, nil
+}
+
+/*
 下单
 OKEx币币交易提供限价单和市价单两种下单模式(更多下单模式将会在后期支持)。只有当您的账户有足够的资金才能下单。
 

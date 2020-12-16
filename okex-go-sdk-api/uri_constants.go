@@ -87,6 +87,7 @@ const (
 	SPOT_INSTRUMENT_TICKER        = "/api/spot/v3/instruments/{instrument_id}/ticker"
 	SPOT_INSTRUMENT_TRADES        = "/api/spot/v3/instruments/{instrument_id}/trades"
 	SPOT_INSTRUMENT_CANDLES       = "/api/spot/v3/instruments/{instrument_id}/candles"
+	SPOT_INSTRUMENT_CANDLES_HISTORY       = "/api/spot/v3/instruments/{instrument_id}/history/candles"
 
 	SWAP_INSTRUMENT_ACCOUNT                 = "/api/swap/v3/{instrument_id}/accounts"
 	SWAP_INSTRUMENT_POSITION                = "/api/swap/v3/{instrument_id}/position"
